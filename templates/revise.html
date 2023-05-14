@@ -1,0 +1,83 @@
+{% extends "base.html" %} {% block title %}Revise{% endblock %} {% block main %}
+<main class="main">
+  <h1>Your Sets</h1>
+  <a href="/revise/new" class="main_button home_button1" style="position: absolute; top: 34.5px; right: 20px" ><span>New</span><ion-icon name="add-outline"></ion-icon></a>
+  <div class="home_sets" id="home_sets"></div>
+  <dialog class="start_set" id="start_set">
+    <h1 id="set_title">Set Name</h1>
+    <button class="close_start_set">
+      <ion-icon onclick="document.getElementById('start_set').close()" class="close_start" name="close-outline" ></ion-icon>
+    </button>
+    <p id="set_desc"></p>
+    <h2>Revise</h2>
+    <div class="start_options">
+      <a href="/revise/flashcards" id="flashcards"><span id="flash_rec"><ion-icon name="sparkles-outline"></ion-icon></span><ion-icon name="albums-outline"></ion-icon><strong>Flashcards</strong></a>
+      <a href="/revise/questions" id="questions"><span id="quest_rec"><ion-icon name="sparkles-outline"></ion-icon></span><ion-icon name="help-outline"></ion-icon><strong>Questions</strong></a>
+      <a href="/revise/fill" id="fill"><ion-icon name="create-outline"></ion-icon><strong>Fill The Gaps</strong></a>
+      <a><ion-icon class="start_lock" name="lock-closed-outline"></ion-icon><ion-icon src="/static/test_icon.svg"></ion-icon><strong>Test</strong></a>
+    </div>
+    <div class="start_buttons">
+      <a id="del_button" class="main_button del_button"><span>Delete</span><ion-icon name="trash-outline"></ion-icon></a>
+    </div>
+  </dialog>
+</main>
+<script>
+  function show(name) {
+      var set = sets[name]
+      var sets_keys = Object.keys(set)
+      sets_keys.pop()
+      var mean = 0
+      var total_ans_len = 0
+      for (var i = 0;i < sets_keys.length;i++){
+          var ans = set[sets_keys[i]]["answers"]["ans1"]
+          total_ans_len += ans.split(" ").length
+      }
+      mean = total_ans_len / sets_keys.length;
+      if(mean <= 2){
+          document.getElementById("quest_rec").style.display = "block"
+          document.getElementById("flash_rec").style.display = "none"
+      }else{
+          document.getElementById("flash_rec").style.display = "block"
+          document.getElementById("quest_rec").style.display = "none"
+      }
+      document.getElementById("start_set").showModal()
+      document.getElementById("set_title").innerText = sets[name]["settings"]["name"]
+      document.getElementById("set_desc").innerText = sets[name]["settings"]["desc"]
+      document.getElementById("flashcards").href = `/revise/flashcards/${name}`
+      document.getElementById("questions").href = `/revise/questions/${name}`
+      document.getElementById("fill").href = `/revise/fill/${name}`
+      document.getElementById("del_button").href = `/revise/delete/${name}`
+      document.getElementById("edit_button").href = `/revise/edit/${name}`
+      document.getElementById("upload").href = `/revise/publish/${name}`
+  }
+  var sets = {{revise_sets|tojson}};
+  var sets_keys = Object.keys(sets)
+  for(var i=0;i<sets_keys.length;i++){
+      var level = sets[sets_keys[i]]["settings"]["level"]
+      var home = document.getElementById("home_sets")
+      var a = document.createElement("a")
+      var img = document.createElement("img")
+      img.draggable = "false"
+      var strong = document.createElement("strong")
+      var p = document.createElement("p")
+      var user = document.createElement("p")
+      a.addEventListener("click",(e) => {
+          show(e.target.id)
+      })
+      img.src = `https://revise.booogle.app/static/set_icons/${sets[sets_keys[i]]["settings"]["background"]}.png`
+      user.innerText = sets[sets_keys[i]]["settings"]["user"]
+      user.classList.add("user_name")
+      strong.innerText = sets[sets_keys[i]]["settings"]["name"]
+      p.innerText = sets[sets_keys[i]]["settings"]["desc"]
+      a.id = sets_keys[i]
+      strong.id = sets_keys[i]
+      img.id = sets_keys[i]
+      p.id = sets_keys[i]
+      a.appendChild(img)
+      a.appendChild(strong)
+      a.appendChild(p)
+      home.appendChild(a)
+  }
+</script>
+<a href="https://revise.booogle.app/" target="_blank" class="home_settings"><ion-icon name="open-outline"></ion-icon></a>
+{% endblock %}

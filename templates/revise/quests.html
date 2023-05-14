@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Questions{% endblock %}
+{% block main %}
+    <form method="post" style="display:flex;justify-content: center;flex-wrap:wrap;width:calc(min(90%,900px) + 2px);" class="main">
+        <div class="flashcard quest_card">
+            <h1 id="quest">{{question}}</h1>
+        </div><br>
+        <button name="button" value="{{ans[0]}}" id="ans1" class="quest_ans_but">{{ans[0]}}</button>
+        <button name="button" value="{{ans[1]}}" id="ans2" class="quest_ans_but">{{ans[1]}}</button>
+        <button name="button" value="{{ans[2]}}" id="ans3" class="quest_ans_but">{{ans[2]}}</button>
+    </form>
+<div class="flash_buttons">
+    <button class="main_button second_button">End<ion-icon name="stop-outline"></ion-icon></button></button>
+</div>
+{% endblock %}

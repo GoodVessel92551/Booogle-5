@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}New Set{% endblock %}
+{% block main %}
+    <main class="main">
+        <h1>New Question</h1>
+        <form method="post">
+            <button name="button" value="next" class="main_button next" style="position:absolute;top:34.5px;right:0px;"><span>Next</span><ion-icon name="arrow-forward-outline"></ion-icon></button>
+            <input autofocus id="quest" autocomplete="off" placeholder="Question" value="{{quest}}" name="quest" required class="new_title text">
+            <button name="button" value="finish" class="main_button second_button home_button" style="position:absolute;top:34.5px;right:130.64px;"><span>Finish</span><ion-icon name="checkmark-done-outline"></ion-icon></button>
+            <textarea maxlength="200" required name="ans1" id="ans1" placeholder="Answer" class="text new_answer"></textarea>
+        </form>
+    </main>
+{% endblock %}

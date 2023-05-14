@@ -1,0 +1,30 @@
+{
+  "short_name": "Booogle",
+  "name": "Booogle 5",
+  "icons": [
+    {
+      "src": "manifest/Booogle_Logo_520.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "manifest/Booogle_Logo_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#1b1e1a",
+  "display": "minimal-ui",
+  "scope": "/",
+  "theme_color": "#2A2F2D",
+  "description": "Booogle 5 is a app that gives you accses yo multiple Booogle apps",
+  "display_override": ["window-controls-overlay"],
+  "screenshots": [
+    {
+      "src": "manifest/Booogle_Logo_520.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

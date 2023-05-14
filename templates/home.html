@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block main %}
+<main class="main">
+    <h1>Booogle Apps</h1>
+    <div class="home_sets">
+        <a href="/calculator"><img draggable="false" alt="Calculator" src="/static/app_icons/Maths.png"><strong>Calculator</strong><p>Use Booogle's calculator to work out your maths.</p></a>
+        <a href="/games"><img draggable="false" alt="Games" src="/static/app_icons/Games.png"><strong>Games</strong><p>Play Some Booogle Games.</p></a>
+        <a href="/tasks"><img draggable="false" alt="Tasks" src="/static/app_icons/Tasks.png"><strong>Tasks</strong><p>Make tasks to make sure that you never miss anything.</p></a>
+        <a href="/revise"><img draggable="false" alt="Revise" src="/static/app_icons/Revise.png"><strong>Revise</strong><p>Revise to make sure you don't forget anything.</p></a>
+        <a href="/time"><img draggable="false" alt="Time" src="/static/app_icons/Time.png"><strong>Time</strong><p>Check the time to make sure you aren't late.</p></a>
+        <a href="/random"><img draggable="false" alt="Random Number Generator" src="/static/app_icons/Random.png"><strong>Random Number Generator</strong><p>Generate random numbers.</p></a>
+        <a href="/chat"><img draggable="false" alt="AI Chat" src="/static/app_icons/Chat.png"><strong>AI Chat</strong><p>Chat with Booogle AI.</p></a>
+    </div>
+</main>
+<a href="/settings" class="home_settings"><ion-icon name="settings-outline"></ion-icon></a>
+{% endblock %}

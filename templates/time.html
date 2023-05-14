@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block title %}Time{% endblock %} {% block main %}
+<h2 class="time" id="time"></h2>
+<script>
+    const update = (t) => {
+        if(t < 10) return "0"+t
+        else return t
+    }
+    const time = () => {
+        date = new Date()
+        hour = update(date.getHours())
+        min = update(date.getMinutes())
+        sec = update(date.getSeconds())
+        var time = document.getElementById("time")
+        time.innerText = hour+":"+min+":"+sec
+    }
+    setInterval(() => {
+        time()
+    },1000)
+    time()
+</script>
+{% endblock %}
