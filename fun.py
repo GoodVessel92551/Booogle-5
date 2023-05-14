@@ -59,3 +59,4 @@ def make_dict(dictionary):
     for i in list:
         list[i] = dict(dictionary[i])
     return list
+
