@@ -176,6 +176,29 @@ def tasks_new():
         db[username()]["tasks"][id] = task
         return redirect("/tasks")
     return render_template("new_task.html",name=username(),profile_pic=pro_pic())
+
+@app.route("/tasks/delete/<id>")
+@web.authenticated_template("login.html")
+def delete_task(id):
+    del db[username()]["tasks"][id]
+    return redirect("/tasks")
+
+@app.route("/tasks/edit/<id>",methods=["POST","GET"])
+@web.authenticated_template("login.html")
+def edit_task(id):
+    task = db[username()]["tasks"][id]
+    if request.method == "POST":
+        title = request.form["title"]
+        date = request.form["date"]
+        desc = request.form["desc"]
+        task = {
+            "title":title,
+            "desc":desc,
+            "date":date
+        }
+        db[username()]["tasks"][id] = task
+        return redirect("/tasks")
+    return render_template("edit_task.html",name=username(),profile_pic=pro_pic(),date=task["date"],title=task["title"],desc=task["desc"])
     
 @app.route("/sw.js", methods=["GET"])
 def sw():

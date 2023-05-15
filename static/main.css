@@ -190,34 +190,29 @@ html {
 }
 
 .boost {
-  user-select: none;
-  position: absolute !important;
-  right: 48px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: linear-gradient(72deg, var(--color), var(--color1));
-  box-shadow: none;
-  padding: 0px 15px 0px 15px;
-  height: 30px;
-  line-height: 30px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: 0.4s box-shadow, 0.4s filter, 0.4s transform;
-  color: var(--text2);
-  text-decoration: none;
-  box-shadow: var(--shadow);
+    user-select: none;
+    position: absolute !important;
+    right: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(72deg, var(--color), var(--color1));
+    color:var(--text2);
+    box-shadow: none;
+    padding: 0px 15px 0px 15px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.4s filter;
+    text-decoration: none;
 }
 
 .boost ion-icon {
-  position: relative;
-  top: 2px;
-  margin-right: 6px;
-  color: var(--text2);
-  transition: 0.4s;
-}
-
-.boost:active {
-  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3) !important;
+    position: relative;
+    top: 3px;
+    margin-left: 6px;
+   color:var(--text2);
+    transition: 0.4s;
 }
 
 .boost:hover {
@@ -241,8 +236,6 @@ html {
 
 .nav_pro img {
   border-radius: 50%;
-  box-shadow: var(--shadow);
-  border: var(--border);
 }
 
 .home_main {
@@ -1076,10 +1069,14 @@ body:has(.game_iframe){
 }
 
 .tasks a strong {
-  color: var(--text);
-  margin: 16px;
-  display: block;
-  font-weight: 500;
+    color: var(--text);
+    margin: 16px;
+    display: block;
+    font-weight: 500;
+    width:132px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .tasks a p:not(.user_name) {
@@ -1097,4 +1094,48 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-repeat: no-repeat;
     background-position: right center;
     cursor:pointer
+}
+
+.open_task {
+  width: 700px;
+  height: 350px;
+  background-color: var(--top_green);
+  border: none;
+  border-radius: 16px;
+  padding: 32px;
+  border: none;
+}
+
+@media (max-width: 800px) {
+  .open_task {
+    width: 250px;
+  }
+}
+
+.open_task h1 {
+  margin: 0px;
+  color: var(--text);
+}
+
+.open_task p {
+  color: var(--text4);
+  font-size: 15px;
+}
+
+.open_task h2 {
+  margin-top: 32px;
+  color: var(--text);
+}
+
+.open_task_buttons {
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    display: flex;
+    gap: 16px;
+}
+
+.open_task::backdrop {
+    background-color: #000;
+    opacity: 0.4;
 }

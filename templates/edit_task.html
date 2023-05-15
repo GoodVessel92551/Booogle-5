@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}New Task{% endblock %}
+{% block main %}
+    <main class="main">
+        <h1>New Task</h1>
+        <form method="post">
+            <input value="{{title}}" autofocus id="title" autocomplete="off" placeholder="Title" name="title" required class="new_title text">
+            <input value="{{date}}" type="date" class="text new_title custom-date-input" required name="date">
+            <button name="button" value="Save" class="main_button" style="position:absolute;top:34.5px;right:0px;"><span>Save</span><ion-icon name="save-outline"></ion-icon></button>
+            <textarea maxlength="200" required name="desc" id="desc" placeholder="Description" class="text new_answer">{{desc}}</textarea>
+        </form>
+    </main>
+{% endblock %}

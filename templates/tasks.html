@@ -4,11 +4,30 @@
     <a href="/tasks/new" class="main_button home_button1" style="position: absolute; top: 34.5px; right: 20px"><span>New</span><ion-icon name="add-outline"></ion-icon></a>
     <div id="tasks" class="tasks">
     </div>
+    <dialog class="open_task" id="task">
+        <h1 id="task_title">Task Name</h1>
+        <button onclick="document.getElementById('task').close()" class="close_start_set">
+            <ion-icon class="close_start" name="close-outline" ></ion-icon>
+        </button>
+        <p id="task_desc">This task is about..</p>
+        <div class="open_task_buttons">
+            <a id="del_button" class="main_button del_button"><span>Delete</span><ion-icon name="trash-outline"></ion-icon></a>
+            <a id="edit_button" class="main_button"><span>Edit</span><ion-icon name="pencil-outline" ></ion-icon></a>
+        </div>
+    </dialog>
 </main>
 <script>
     var tasks = {{tasks|tojson}};
     var task_elerment = document.getElementById("tasks")
     var keys = Object.keys(tasks)
+    const show  = (id) => {
+        console.log(id)
+        document.getElementById("task").showModal()
+        document.getElementById("task_title").innerText = tasks[id]["title"]
+        document.getElementById("task_desc").innerText = tasks[id]["desc"]
+        document.getElementById("del_button").href = `/tasks/delete/${id}`
+        document.getElementById("edit_button").href = `/tasks/edit/${id}`
+    }
     for(var i=0;i<keys.length;i++){
         var task = document.createElement("a")
         var title = document.createElement("strong")
@@ -17,10 +36,17 @@
         title.innerText = tasks[keys[i]]["title"]
         date.innerText = tasks[keys[i]]["date"]
         desc.innerText = tasks[keys[i]]["desc"]
+        task.id = keys[i]
+        title.id = keys[i]
+        date.id = keys[i]
+        desc.id = keys[i]
         task_elerment.appendChild(task)
         task.appendChild(title)
         task.appendChild(date)
         task.appendChild(desc)
+        task.addEventListener("click", (e)=>{
+            show(e.target.id)
+        })
     }
 </script>
 {% endblock %}
