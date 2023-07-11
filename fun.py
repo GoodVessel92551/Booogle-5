@@ -16,8 +16,12 @@ def sets():
     text = r.json()
     url_revise = "https://revise.booogle.app/api/"+text["token"]+"/"+id+"/"+name
     r_revise = requests.get(url_revise)
-    sets = r_revise.json()
-    return sets
+    print(r_revise.text)
+    if r_revise.text == "No User":
+        return "No User"
+    else:
+        sets = r_revise.json()
+        return sets
 
 def delete_set(set_name):
     id = request.headers["X-Replit-User-Id"]
@@ -36,6 +40,8 @@ def revise_new(a,b,c):
     text = r.json()
     url_revise = "https://revise.booogle.app/api/new/"+text["token"]+"/"+id+"/"+name+"/"+a+"/"+b+"/"+c
     r = requests.get(url_revise)
+    if r.text != "Done":
+        return False
 
 def revise_new_quest(q,a,set_name):
     id = request.headers["X-Replit-User-Id"]
@@ -45,6 +51,16 @@ def revise_new_quest(q,a,set_name):
     text = r.json()
     url_revise = "https://revise.booogle.app/api/new_quest/"+text["token"]+"/"+id+"/"+name+"/"+set_name+"/"+q+"/"+a
     r = requests.get(url_revise)
+
+def revise_new_account():
+    id = request.headers["X-Replit-User-Id"]
+    name = request.headers["X-Replit-User-Name"]
+    url = "https://api.booogle.app/api/"+os.environ['key']+"/"+id+"/"+name
+    r = requests.get(url)
+    text = r.json()
+    url_revise = "https://revise.booogle.app/api/account/"+text["token"]+"/"+id+"/"+name
+    r = requests.get(url_revise)
+    return r.text
 
 def id_gen():
     id = ""

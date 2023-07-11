@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block title %}Random Number{% endblock %} {% block main %}
+<main class="main">
+    <h1>Number Generator</h1>
+</main>
+<div class="random_number">
+    <div id="number" class="random_number_location"></div>
+    <div class="options">
+    <input id="min" placeholder="Min" value="1" class="text text_number" type="number">
+    <input id="max" placeholder="Max" value="10" class="text text_number" type="number">
+    <button class="main_button_2" onclick="random_number()">Generate<ion-icon name="dice-outline"></ion-icon></button>
+    </div>
+</div>
+<script>
+    const random_number = () => {
+        var min = parseInt(document.getElementById("min").value);
+        var max = parseInt(document.getElementById("max").value);
+        var num = Math.floor(Math.random() * (max - min + 1) + min);
+        document.getElementById("number").innerText = num;
+    }
+    random_number()
+</script>
+{% endblock %}

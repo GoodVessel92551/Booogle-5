@@ -12,6 +12,7 @@
         <p id="task_desc">This task is about..</p>
         <div class="open_task_buttons">
             <a id="del_button" class="main_button del_button"><span>Delete</span><ion-icon name="trash-outline"></ion-icon></a>
+            <a id="com_button" class="second_button main_button"><span>Complete</span><ion-icon name="checkmark-outline"></ion-icon></a>
             <a id="edit_button" class="main_button"><span>Edit</span><ion-icon name="pencil-outline" ></ion-icon></a>
         </div>
     </dialog>
@@ -26,6 +27,7 @@
         document.getElementById("task_title").innerText = tasks[id]["title"]
         document.getElementById("task_desc").innerText = tasks[id]["desc"]
         document.getElementById("del_button").href = `/tasks/delete/${id}`
+        document.getElementById("com_button").href = `/tasks/done/${id}`
         document.getElementById("edit_button").href = `/tasks/edit/${id}`
     }
     for(var i=0;i<keys.length;i++){

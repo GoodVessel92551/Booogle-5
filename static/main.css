@@ -71,8 +71,9 @@
 }
 
 ::selection {
-  background: #496949;
+  background: #1E361E;
   border-radius: 4px;
+    color:var(--on_main_button);
 }
 
 .top_menu span {
@@ -249,15 +250,16 @@ html {
 }
 
 .login_image {
-  width: 50%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  box-shadow: var(--shadow2);
-  background-image: url("/static/waterfall.png");
-  background-size: cover;
-  background-position: center;
+    width: 50%;
+    height: calc(100% - 32px);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-image: url("/static/waterfall.png");
+    background-size: cover;
+    background-position: center;
+    margin-top: 16px;
+    border-radius: 0px 32px 32px 0px;
 }
 
 .login_title {
@@ -323,19 +325,18 @@ html {
 }
 
 .login_button {
-  position: absolute;
-  left: 50%;
-  top: 550px;
-  transform: translate(-50%);
-  background: linear-gradient(72deg, var(--color), var(--color1));
-  border: none;
-  width: 280px;
-  height: 40px;
-  box-shadow: var(--shadow);
-  border-radius: 4px;
-  color: var(--text2);
-  cursor: pointer;
-  transition: 0.4s;
+    position: absolute;
+    left: 50%;
+    bottom: 150px;
+    transform: translate(-50%);
+    background: var(--main_button);
+    color:var(--on_main_button);
+    border: none;
+    width: 280px;
+    height: 40px;
+    border-radius: 32px;
+    cursor: pointer;
+    transition: 0.4s;
 }
 
 .login_button:hover {
@@ -343,9 +344,6 @@ html {
   filter: brightness(95%);
 }
 
-.login_button:active {
-  box-shadow: 0px 0px 10px var(--color);
-}
 
 .login_button ion-icon {
   position: relative;
@@ -1097,7 +1095,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .open_task {
-  width: 700px;
+  width: 600px;
   height: 350px;
   background-color: var(--top_green);
   border: none;
@@ -1138,4 +1136,193 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .open_task::backdrop {
     background-color: #000;
     opacity: 0.4;
+}
+
+.profile_menu{
+    top:68px;
+    right:8px;
+    position:absolute;
+    width:200px;
+    height:250px;
+    background:var(--top_back);
+    z-index:10;
+    border-radius:16px;
+}
+
+.profile_menu > span{
+    width:100%;
+    height:100px;
+    display:block;
+    background:#323b2f;
+    border-radius:10px;
+    padding:10px;
+    box-sizing:border-box;
+}
+
+.calc{
+    width:300px;
+    background:var(--top_back);
+    top:50%;
+    left:50%;
+    position:absolute;
+    transform:translate(-50%,-50%);
+    border-radius:32px;
+    overflow:hidden;
+    padding-bottom:8px;
+}
+
+.screen{
+    width:100%;
+    height:150px;
+    display:block;
+    position:relative;
+}
+
+.row{
+    width:100%;
+    height:72px;
+    padding:8px 16px;
+    display:flex;
+    gap:16px;
+    box-sizing:border-box;
+    justify-content: space-evenly;
+}
+
+.row > button{
+    aspect-ratio:1/1;
+    border-radius:32px;
+    background:#383E3B;
+    border:none;
+    color:var(--text);
+    font-size:16px;
+    cursor:pointer;
+    transition:.4s filter;
+}
+
+.row > button:hover{
+    filter:brightness(110%);
+}
+
+.operation{
+    background:#404944 !important;
+}
+
+.equation{
+    position:absolute;
+    bottom:42px;
+    right:16px;
+    color:var(--text3);
+    font-size:20px;
+}
+
+.answer{
+    position:absolute;
+    bottom:8px;
+    right:16px;
+    color:var(--text);
+    font-size:28px;
+    font-weight:bold;
+}
+
+.random_number{
+    top:50%;
+    left:50%;
+    position:absolute;
+    transform:translate(-50%,-50%);
+    width:420px;
+    display:flex;
+}
+
+@media (max-width:500px){
+    .random_number{
+        width:204px !important;
+        height:auto !important;
+        flex-direction:column;
+    }
+    .random_number_location{
+        width:204px !important;
+        margin-right:0px !important;
+        margin-bottom:16px;
+    }
+}
+
+.random_number_location{
+    width:200px;
+    height:142px;
+    margin-right:16px;
+    background:var(--top_back);
+    display:inline-block;
+    border-radius:16px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:var(--text);
+    font-size:32px;
+    font-weight:bold;
+}
+
+.options{
+    width:204px;
+    display:inline-flex;
+    flex-direction: column;
+}
+
+.main_button_2 {
+  padding: 8px 24px 8px 24px;
+  color: var(--on_main_button);
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.4s transform, 0.4s box-shadow, 0.4s filter;
+  text-decoration: none;
+  background: var(--main_button);
+  box-shadow: none;
+}
+
+.main_button_2:focus-visible {
+  outline: 1px solid var(--color);
+}
+
+.main_button_2:active {
+  box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+.main_button_2 ion-icon {
+  color: var(--on_main_button);
+  position: relative;
+  top: 3px;
+  font-size: 18px;
+  margin-left: 15px;
+  transition: 0.4s;
+}
+
+.text_number{
+    padding: 10px 14px !important;
+    border-radius:32px !important;
+}
+
+.new_revise_account{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+}
+
+.new_revise_account > h1{
+    color:var(--text);
+    margin-bottom:8px;
+}
+
+.new_revise_account > p{
+    margin-top:8px;
+    color:var(--text3);
+    font-size:14px;
+    width:calc()
+}
+
+.new_revise_account > a{
+    margin-top:32px;
+    display:inline-block;
 }

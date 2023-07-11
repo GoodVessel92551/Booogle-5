@@ -2,7 +2,7 @@ from flask import Flask, render_template,redirect,request,current_app,session
 from replit import web,db
 from better_profanity import profanity
 import os,random
-from fun import pro_pic,username,sets,delete_set,revise_new,revise_new_quest,id_gen,make_dict
+from fun import pro_pic,username,sets,delete_set,revise_new,revise_new_quest,id_gen,make_dict,revise_new_account
 
 user = web.UserStore()
 
@@ -39,7 +39,10 @@ def play(game):
 @app.route("/revise")
 @web.authenticated_template("login.html")
 def revise():
-    return render_template("revise.html",profile_pic=pro_pic(),name=username,revise_sets=sets())
+    revise_sets = sets()
+    if revise_sets == "No User":
+        return redirect("/revise/account")
+    return render_template("revise.html",profile_pic=pro_pic(),name=username,revise_sets=revise_sets)
 
 @app.route("/revise/flashcards/<set>")
 @web.authenticated_template("login.html")
@@ -61,6 +64,7 @@ def finish():
 def delete(name):
     delete_set(name)
     return redirect("/revise")
+    
 @app.route("/revise/new",methods=["POST","GET"])
 @web.authenticated_template("login.html")
 def new():
@@ -68,7 +72,9 @@ def new():
         title = request.form["title"]
         desc = request.form["desc"]
         cover = request.form["cover"]
-        revise_new(title,desc,cover)
+        r = revise_new(title,desc,cover)
+        if r == False:
+            return redirect("/revise/new")
         return redirect("/revise/new/question/"+title)
     return render_template("revise/new.html",name=username(),profile_pic=pro_pic())
 
@@ -78,7 +84,9 @@ def new_quest(name):
     if request.method == "POST":
         quest = request.form["quest"]
         ans = request.form["ans1"]
-        revise_new_quest(quest,ans,name)
+        r = revise_new_quest(quest,ans,name)
+        if r == False:
+            return redirect("/")
         if request.form["button"] == "finish":
             return redirect("/revise")
     return render_template("/revise/new_quest.html",name=username(),profile_pic=pro_pic())
@@ -183,6 +191,12 @@ def delete_task(id):
     del db[username()]["tasks"][id]
     return redirect("/tasks")
 
+@app.route("/tasks/done/<id>")
+@web.authenticated_template("login.html")
+def done_task(id):
+    del db[username()]["tasks"][id]
+    return redirect("/tasks")
+
 @app.route("/tasks/edit/<id>",methods=["POST","GET"])
 @web.authenticated_template("login.html")
 def edit_task(id):
@@ -207,5 +221,26 @@ def sw():
 @app.route("/offline")
 def offline():
     return render_template("offline.html")
+
+@app.route("/calculator")
+@web.authenticated_template("login.html")
+def calculator():
+    return render_template("calculator.html",name=username(),profile_pic=pro_pic())
+
+@app.route("/random")
+@web.authenticated_template("login.html")
+def random_number():
+    return render_template("random_number.html",name=username(),profile_pic=pro_pic())
+
+@app.route("/revise/account")
+@web.authenticated_template("login.html")
+def revise_account():
+    return render_template("revise_account.html",name=username(),profile_pic=pro_pic())
+
+@app.route("/revise/account/new")
+@web.authenticated_template("login.html")
+def add_revise_account():
+    print(revise_new_account())
+    return redirect("/revise")
 
 app.run(host="0.0.0.0",port=8080,debug=True)

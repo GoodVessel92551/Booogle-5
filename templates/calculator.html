@@ -1,0 +1,97 @@
+{% extends "base.html" %} {% block title %}Calculator{% endblock %} {% block main %}
+    <div class="calc">
+        <div class="screen">
+            <span class="equation" id="equation"></span>
+            <span class="answer" id="answer"></span>
+        </div>
+        <div class="row">
+            <button onclick="calc('AC')" class="operation">AC</button>
+            <button onclick="calc('(')" class="operation">(</button>
+            <button onclick="calc(')')" class="operation">)</button>
+            <button onclick="calc('/')" class="operation">÷</button>
+        </div>
+        <div class="row">
+            <button onclick="calc('7')">7</button>
+            <button onclick="calc('8')">8</button>
+            <button onclick="calc('9')">9</button>
+            <button onclick="calc('*')" class="operation">×</button>
+        </div>
+        <div class="row">
+            <button onclick="calc('4')">4</button>
+            <button onclick="calc('5')">5</button>
+            <button onclick="calc('6')">6</button>
+            <button onclick="calc('-')" class="operation">-</button>
+        </div>
+        <div class="row">
+            <button onclick="calc('1')">1</button>
+            <button onclick="calc('2')">2</button>
+            <button onclick="calc('3')">3</button>
+            <button onclick="calc('+')" class="operation">+</button>
+        </div>
+            <div class="row">
+            <button onclick="calc('.')">.</button>
+            <button onclick="calc('0')">0</button>
+            <button onclick="calc('ANS')" class="operation">ANS</button>
+            <button onclick="calc('=')" class="operation">=</button>
+        </div>
+    </div>
+<script>
+    var equation = ""
+    var ans = ""
+    var last_ans = 0
+    var ans_compleat = false
+    var equation_element = document.getElementById("equation")
+    var ans_element = document.getElementById("answer")
+    const isNumberOrOperator = (str) => {
+        var numberRegex = /^-?\d*\.?\d+$/;
+        if (numberRegex.test(str)) {
+            return true;
+        }
+        var operators = ["=", "-", ".", "+", "*","(",")"];
+        if (operators.includes(str)) {
+            return true;
+        }
+        return false;
+    }
+    
+    document.addEventListener("keydown",(e) => {
+        var key = e.key;
+        if(key == "*" || key == "x"){
+            calc("*");
+        }else{
+            if (isNumberOrOperator(key)){
+                calc(key);
+            }
+        }
+    })
+    const calc = (num) => {
+        if(ans_compleat){
+            ans_element.textContent = ""
+            equation_element.textContent = ans
+            equation = ""
+            ans_compleat = false
+        }
+        if(num == "="){
+            ans_compleat = true
+            ans = eval(equation)
+            last_ans = ans
+            ans_element.textContent = ans
+            equation_element.textContent = equation.replace("*","×").replace("/","÷")
+        }else if(num == "AC"){
+            equation = ""
+            ans_element.textContent = ""
+            equation_element.textContent = ""
+            ans_element.textContent = equation.replace("*","×").replace("/","÷")
+        }else if (num == "ANS"){
+            equation += last_ans
+        }else{
+            var operators = ["=", "-", ".", "+", "*","(",")"];
+            if (operators.includes(num) && equation == "") {
+                equation = last_ans
+            }
+            equation += num
+            ans_element.textContent = equation.replace("*","×").replace("/","÷")
+        }
+    }
+</script>
+{% endblock %}
