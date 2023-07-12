@@ -29,7 +29,22 @@ def games():
 @app.route("/time")
 @web.authenticated_template("login.html")
 def time():
+    return render_template("time_home.html",profile_pic=pro_pic(),name=username())
+
+@app.route("/time/time")
+@web.authenticated_template("login.html")
+def current_time():
     return render_template("time.html",profile_pic=pro_pic(),name=username())
+
+@app.route("/time/stopwatch")
+@web.authenticated_template("login.html")
+def stopwatch_time():
+    return render_template("stopwatch.html",profile_pic=pro_pic(),name=username())
+
+@app.route("/time/countdown")
+@web.authenticated_template("login.html")
+def countdown_time():
+    return render_template("countdown.html",profile_pic=pro_pic(),name=username())
 
 @app.route("/play/<game>")
 @web.authenticated_template("login.html")
@@ -231,6 +246,11 @@ def calculator():
 @web.authenticated_template("login.html")
 def random_number():
     return render_template("random_number.html",name=username(),profile_pic=pro_pic())
+
+@app.route("/cps")
+@web.authenticated_template("login.html")
+def cps():
+    return render_template("cps.html",name=username(),profile_pic=pro_pic())
 
 @app.route("/revise/account")
 @web.authenticated_template("login.html")

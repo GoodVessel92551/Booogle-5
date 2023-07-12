@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %}Time{% endblock %} {% block main %}
+{% extends "base.html" %} {% block title %}Tasks{% endblock %} {% block main %}
 <main class="main">
     <h1>Your Tasks</h1>
     <a href="/tasks/new" class="main_button home_button1" style="position: absolute; top: 34.5px; right: 20px"><span>New</span><ion-icon name="add-outline"></ion-icon></a>
@@ -12,8 +12,8 @@
         <p id="task_desc">This task is about..</p>
         <div class="open_task_buttons">
             <a id="del_button" class="main_button del_button"><span>Delete</span><ion-icon name="trash-outline"></ion-icon></a>
-            <a id="com_button" class="second_button main_button"><span>Complete</span><ion-icon name="checkmark-outline"></ion-icon></a>
-            <a id="edit_button" class="main_button"><span>Edit</span><ion-icon name="pencil-outline" ></ion-icon></a>
+            <a id="edit_button" class="second_button main_button"><span>Edit</span><ion-icon name="pencil-outline" ></ion-icon></a>
+            <a id="com_button" class="main_button"><span>Complete</span><ion-icon name="checkmark-outline"></ion-icon></a>
         </div>
     </dialog>
 </main>

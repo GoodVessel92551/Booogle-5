@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block title %}Countdown{% endblock %} {% block main %}
+<h2 class="time" id="time">00:00:00</h2>
+<div class="options_time">
+    <h3>Enter Your Time</h3>
+    <div class="buttons">
+        <button onclick="start()" class="main_button"><span>Start</span><ion-icon name="stopwatch-outline"></ion-icon></button>
+        <button onclick="lap()" class="main_button second_button"><span>Lap</span><ion-icon name="flag-outline"></ion-icon></button>
+        <button onclick="stop()" class="main_button del_button"><span>Stop</span><ion-icon name="stop-outline"></ion-icon></button>
+    </div>
+</div>
+<script>
+    var time = document.getElementById("time")
+
+    const update = (t) => {
+        if(t < 10) return "0"+t
+        else return t
+    }
+
+    const timer = () => {
+    }
+    const start = () => {
+        interval = setInterval(() => {
+            counter();
+        },1000)
+    }
+</script>
+{% endblock %}

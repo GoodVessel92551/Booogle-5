@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% block title %}Stopwatch{% endblock %} {% block main %}
+<h2 class="time" id="time">00:00:00:00</h2>
+<div class="options_time">
+    <h3>Your Laps</h3>
+    <div class="laps" id="laps">
+        You Have No Laps
+    </div>
+    <div class="buttons">
+        <button onclick="start()" class="main_button"><span>Start</span><ion-icon name="stopwatch-outline"></ion-icon></button>
+        <button onclick="lap()" class="main_button second_button"><span>Lap</span><ion-icon name="flag-outline"></ion-icon></button>
+        <button onclick="stop()" class="main_button del_button"><span>Stop</span><ion-icon name="stop-outline"></ion-icon></button>
+    </div>
+</div>
+<script>
+    var time = document.getElementById("time")
+    var laps = document.getElementById("laps")
+    var time_list = [0,0,0,0]
+    var first_lap = true
+    const update = (t) => {
+        if(t < 10) return "0"+t
+        else return t
+    }
+
+    const timer = () => {
+        if(time_list[3] == 99){
+            time_list[3] = 0
+            time_list[2]++
+        }
+        if(time_list[2] == 59){
+            time_list[2] = 0
+            time_list[1]++
+        }
+        if(time_list[1] == 59){
+            time_list[1] = 0
+            time_list[0]++
+        }
+        else{
+            time_list[3]++
+        }
+        time.innerText = `${update(time_list[0])}:${update(time_list[1])}:${update(time_list[2])}:${update(time_list[3])}`
+    }
+    const start = () => {
+        interval = setInterval(() => {
+            timer();
+        },10)
+    }
+
+    const stop = () => {
+        clearInterval(interval)
+    }
+
+    const lap = () => {
+        if (first_lap){
+            laps.innerText = ""
+            first_lap = false
+        }
+        var lap_time = `${update(time_list[0])}:${update(time_list[1])}:${update(time_list[2])}:${update(time_list[3])}`
+        var p = document.createElement("p")
+        p.innerText = lap_time
+        laps.appendChild(p)
+    }
+</script>
+{% endblock %}

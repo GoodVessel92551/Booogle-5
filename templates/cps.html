@@ -1,0 +1,66 @@
+{% extends "base.html" %} {% block title %}CPS Test{% endblock %} {% block main %}
+<div class="cps">
+    <div>
+        <a><b>Time</b><p id="time" contenteditable="true">5.0</p></a>
+        <a><b>CPS</b><p id="cps" >0</p></a>
+        <a><b>Clicks</b><p id="clicks">0</p></a>
+    </div>
+    <button class="click" id="clicker"></button>
+</div>
+<button onclick="start()" class="main_button start_again"><span>Try Again</span><ion-icon name="play-outline"></ion-icon></button>
+<script>
+    var time = document.getElementById("time")
+    var cps = document.getElementById("cps")
+    var clicks = document.getElementById("clicks")
+    var clicker = document.getElementById("clicker")
+    var clicks_num = 0
+    var current_time
+    var cps_count = 0
+    var started = false 
+    var ended = false
+    var start_time
+    clicker.addEventListener("click",() => {
+        if (!started){
+            timer_fun()
+            current_time = time.innerText
+            start_time = time.innerText
+            started = true
+            clicks_num++
+            clicks.innerText = clicks_num
+        }else if (!ended){
+            clicks_num++
+            clicks.innerText = clicks_num
+        }
+    })
+    var timer_fun = () => {
+        timer = setInterval(() => {
+            if(current_time == 0.1){
+                ended = true
+                clearInterval(timer)
+            }
+            current_time -= 0.1
+            cps_count = clicks_num/(start_time-current_time)
+            cps.innerText = Math.round(cps_count)
+            current_time = parseFloat(current_time.toFixed(2))
+            string_time = ""+current_time
+            if(string_time.split('.').length == 1 && current_time != 0){
+                time.innerText = string_time+"0"
+            }else{
+                time.innerText = string_time
+            }
+        },100)
+    }
+
+const start = () => {
+    clicks_num = 0
+    current_time = 5.0
+    cps_count = 0
+    started = false 
+    ended = false
+    start_time = start_time
+    time.innerText = start_time
+    cps.innerText = 0
+    clicks.innerText = 0
+}
+</script>
+{% endblock %}
